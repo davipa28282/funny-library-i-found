@@ -49,36 +49,6 @@ if not _G.JxereasExistingHooks.GuiDetectionBypass then
 		syn_context_set(context)
 		return new
 	end
-
-	local old
-	old = hookmetamethod(game, "__namecall", function(self, ...)
-		local method = getnamecallmethod()
-		if self == ContentProvider and (method == "PreloadAsync" or method == "preloadAsync") then
-			local args = {...}
-			if type(args[1]) ~= "table" or type(args[2]) ~= "function" then
-				return old(self, ...)
-			end
-
-			local err
-			task.spawn(function()
-				setnamecallmethod(method) --different thread, different namecall method
-				local s,e = pcall(old, self, args[1])
-				if not s and e then
-					err = e
-				end
-			end)
-
-			if err then
-				return old(self, args[1])
-			end
-
-			args[1] = FilterTable(args[1])
-			setnamecallmethod(method)
-			return old(self, args[1], args[2])
-		end
-		return old(self, ...)
-	end)
-
 	_G.JxereasExistingHooks.GuiDetectionBypass = true
 end
 
