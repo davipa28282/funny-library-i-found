@@ -1,5 +1,3 @@
--- drops all ur hats wherever you ran the script
--- made as a proof of concept and resource for how to use the hats (animations, fling, whatever) for your own script
 local fph = workspace.FallenPartsDestroyHeight
 
 local plr = game.Players.LocalPlayer
@@ -7,13 +5,6 @@ local character = plr.Character
 local hrp = character:WaitForChild("HumanoidRootPart")
 local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
 local start = hrp.CFrame
-
-local campart = Instance.new("Part",character)
-campart.Transparency = 1
-campart.CanCollide = false
-campart.Size = Vector3.one
-campart.Position = start.Position
-campart.Anchored = true
 
 local function updatestate(hat,state)
     if sethiddenproperty then
