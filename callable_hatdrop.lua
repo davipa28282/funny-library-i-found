@@ -108,7 +108,7 @@ repeat
 until plr.Character ~= character or dropped
 
 if dropped then
-   return true
+   return true, allhats
 else
     return false
 end
